@@ -1,0 +1,18 @@
+#!/bin/sh
+# main 직접 push 차단. (진짜 방어선은 GitHub ruleset — 이건 실수 방지용)
+while read -r _local_ref _local_sha remote_ref _remote_sha; do
+  # 최초 push(원격에 아직 브랜치 없음)는 리포 부트스트랩이므로 허용
+  case "$_remote_sha" in
+    *[!0]*) ;;
+    *) continue ;;
+  esac
+  case "$remote_ref" in
+    refs/heads/main)
+      echo "" >&2
+      echo "  main에 직접 push하지 않습니다. PR로 보내세요:" >&2
+      echo "    gh pr create --fill" >&2
+      echo "" >&2
+      exit 1 ;;
+  esac
+done
+exit 0

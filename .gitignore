@@ -1,0 +1,13 @@
+# env — public 리포입니다. 절대 커밋하지 마세요
+.env
+.env.*
+!.env.example
+
+# Go
+/bin/
+/tmp/
+*.test
+*.out
+coverage.*
+
+.DS_Store

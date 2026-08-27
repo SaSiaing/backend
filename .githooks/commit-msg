@@ -1,0 +1,39 @@
+#!/bin/sh
+# 커밋 메시지 규약 강제. 규약 본문은 AGENTS.md 참고.
+first=$(head -n1 "$1")
+
+case "$first" in
+  "Merge "*|"Revert "*|"fixup!"*|"squash!"*) exit 0 ;;
+esac
+
+pattern='^(feat|fix|docs|refactor|chore)(\([a-z0-9-]+\))?: .{2,}'
+
+if printf '%s' "$first" | grep -Eq "$pattern"; then
+  len=$(printf '%s' "$first" | wc -c | tr -d ' ')
+  if [ "$len" -gt 100 ]; then
+    echo "  경고: 첫 줄이 ${len}바이트입니다. 72자 안쪽을 권합니다." >&2
+  fi
+  exit 0
+fi
+
+echo "" >&2
+echo "  커밋 메시지가 규약에 안 맞습니다." >&2
+echo "" >&2
+echo "  받은 것 : $first" >&2
+echo "  형식    : <type>(<scope>): <설명> (#이슈)" >&2
+echo "" >&2
+echo "  type — 난이도가 아니라 '동작이 바뀌었나'로 고릅니다" >&2
+echo "    feat      기능·코드·파일 추가      (동작 추가)" >&2
+echo "    fix       버그 수정                (동작 교정, 난이도 무관)" >&2
+echo "    docs      문서" >&2
+echo "    refactor  구조 변경·코드 제거      (동작 불변)" >&2
+echo "    chore     라이브러리·설정·코멘트·포맷" >&2
+echo "" >&2
+echo "  scope — 선택 (생략 가능). 예: (auth) (db) (chart)" >&2
+echo "" >&2
+echo "  예)" >&2
+echo "    feat: 내역 등록 엔드포인트 추가 (#21)" >&2
+echo "    fix(auth): 세션 토큰 만료 처리 (#14)" >&2
+echo "    chore: golangci-lint 1.62 업데이트" >&2
+echo "" >&2
+exit 1

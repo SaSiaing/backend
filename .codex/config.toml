@@ -1,0 +1,19 @@
+# Codex 프로젝트 설정.
+#
+# 주의 — 이 파일의 [hooks]는 현재 믿을 수 없습니다.
+#   openai/codex#17532 (열림): 리포 로컬 .codex/config.toml 훅이
+#   인터랙티브 세션에서 등록되지 않습니다. 수동 실행은 되는데 세션에서는 안 걸립니다.
+#   또한 개발자 각자가 이 프로젝트를 trust_level = "trusted"로 설정해야 로드됩니다.
+#
+# 커밋 규약의 실제 강제는 .githooks/ 가 담당합니다.
+# 아래 훅은 (a) 버그가 고쳐지면 자동으로 살아나고 (b) 의도를 문서로 남기는 용도입니다.
+# 규약 본문은 AGENTS.md — Codex가 자동으로 읽습니다.
+
+[[hooks.PreToolUse]]
+matcher = "Bash"
+
+[[hooks.PreToolUse.hooks]]
+type = "command"
+command = ".codex/guard-branch.sh"
+timeout = 5
+statusMessage = "브랜치 확인"
