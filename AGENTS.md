@@ -25,7 +25,7 @@ app 리포에는 `make sync-conventions`로 같은 파일과 규칙 하네스를
 - **dev / stage 브랜치는 만들지 않습니다.** MVP 기간에는 `main` 하나로 갑니다.
 - 이름: `<type>/<이슈번호>-<요약>`
 
-```
+```text
 feat/21-transaction-create
 fix/24-past-date-reset
 refactor/07-repo-interface
@@ -37,7 +37,7 @@ refactor/07-repo-interface
 
 ## 커밋
 
-```
+```text
 <type>(<scope>): <설명> (#이슈번호)
 ```
 
@@ -56,7 +56,7 @@ type은 **난이도가 아니라 의도**로 고릅니다. 질문 하나로 갈�
 scope는 **선택**입니다. 리포가 나뉘어 있어서 `(server)` `(app)` 같은 건 의미가 없습니다.
 쓸 거면 리포 안의 영역으로: `(auth)` `(db)` `(chart)` `(ci)`.
 
-```
+```text
 feat: 내역 등록 엔드포인트 추가 (#21)
 fix(auth): 세션 토큰 만료 처리 (#14)
 refactor: repo 인터페이스로 service 의존성 분리 (#07)
@@ -81,7 +81,7 @@ chore: golangci-lint 1.62 업데이트
 - **집계는 `occurred_at` 기준.** `created_at`이 아닙니다 — 어제 쓴 걸 오늘 넣는 게 일상입니다.
 - 삭제는 soft delete (`deleted_at`). 조회는 항상 `deleted_at IS NULL`.
 - 에러 응답은 `{ "message": "...", "code": "..." }` 하나로 통일합니다.
-- **API를 바꿀 때는 `backend/docs/api.md`를 먼저 고칩니다.** 코드부터 바꾸지 않습니다.
+- **API를 바꿀 때는 [backend의 `docs/api.md`](https://github.com/SaSiaing/backend/blob/main/docs/api.md)를 먼저 고칩니다.** 코드부터 바꾸지 않습니다.
 
 ## 범위 밖 — 구현하지 않습니다
 
@@ -101,7 +101,7 @@ chore: golangci-lint 1.62 업데이트
 
 ## backend 전용
 
-```
+```text
 cmd/api/          엔트리포인트
 internal/handler/ Echo 핸들러
 internal/service/ 도메인 로직
@@ -120,7 +120,7 @@ docs/             api.md, plan.md
 
 ## app 전용
 
-```
+```text
 lib/core/       Dio 클라이언트, 라우팅, 테마, 공용 위젯
 lib/features/   화면별 (auth / household / transaction / summary / settings)
 ```

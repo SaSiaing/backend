@@ -33,9 +33,9 @@ jobs:
           fi
 
           if [ "$REPOSITORY" = "SaSiaing/app" ]; then
-            issue_pattern='^[[:space:]]*-[[:space:]]*(Related to|Refs?)[[:space:]]+SaSiaing/backend#[0-9]+'
+            issue_pattern='^[[:space:]]*-[[:space:]]*(Related to|Refs?)[[:space:]]+SaSiaing/backend#[0-9]+([[:space:][:punct:]]|$)'
           else
-            issue_pattern='^[[:space:]]*-[[:space:]]*(Closes|Fixes|Resolves|Related to|Refs?)[[:space:]]+(SaSiaing/backend)?#[0-9]+'
+            issue_pattern='^[[:space:]]*-[[:space:]]*(Closes|Fixes|Resolves|Related to|Refs?)[[:space:]]+(SaSiaing/backend)?#[0-9]+([[:space:][:punct:]]|$)'
           fi
 
           if ! printf '%s\n' "$PR_BODY" | grep -Eiq "$issue_pattern"; then

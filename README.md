@@ -42,4 +42,5 @@ go run ./cmd/api
 - `.github/` — 이슈·PR 템플릿과 PR 제목·이슈 연결 검사.
 
 처음 열 때 프로젝트를 **trusted**로 승인하고 `/hooks`에서 프로젝트 훅을 검토·승인하세요.
+Codex의 작업 루트는 부모 디렉터리가 아니라 `backend` 또는 `app` 저장소로 선택해야 합니다.
 `make dev`를 한 번 실행하면 Git 훅까지 활성화됩니다.

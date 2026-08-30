@@ -14,6 +14,6 @@ matcher = "^startup$"
 
 [[hooks.SessionStart.hooks]]
 type = "command"
-command = 'sh "$(git rev-parse --show-toplevel)/.codex/guard-branch.sh"'
+command = 'root="$(git rev-parse --show-toplevel 2>/dev/null)" || { echo "Codex를 app 또는 backend 저장소 안에서 시작하세요." >&2; exit 1; }; sh "$root/.codex/guard-branch.sh"'
 timeout = 5
 statusMessage = "브랜치 확인"
