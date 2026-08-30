@@ -16,6 +16,9 @@
 
 ## 엔드포인트
 
+### 상태
+- `GET /health` — 인증 없이 PostgreSQL 연결 상태 확인. 정상 시 `{ "status": "ok" }`
+
 ### 인증
 - `POST /auth/google` — body `{ "id_token": "..." }` → 세션 토큰
 

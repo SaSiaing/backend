@@ -7,14 +7,15 @@
 
 ## 로컬 실행
 
-```
+```bash
 cp .env.example .env    # 값 채우기
-make dev                # Postgres 기동 + git hook 활성화
-go run ./cmd/api
+make run                # Postgres 기동 + API 서버 실행
 ```
 
-`make dev`를 **반드시 한 번은 돌려야 합니다.** git hook은 클론마다 수동 활성화가 필요하고,
-`make dev`가 그걸 대신해 줍니다. (`make hooks`만 따로 돌려도 됩니다)
+`make run`은 내부에서 `make dev`를 실행해 PostgreSQL을 띄우고 git hook도 활성화합니다.
+git hook만 필요하면 `make hooks`를 따로 실행해도 됩니다.
+
+서버가 실행되면 `GET http://localhost:8080/health`로 PostgreSQL 연결 상태를 확인할 수 있습니다.
 
 ## 문서
 
