@@ -1,0 +1,62 @@
+name: 작업
+description: 기능, 개선, 문서, 인프라 작업을 제안합니다.
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: 영역
+      options:
+        - backend
+        - app
+        - infra
+        - docs
+        - backend + app
+    validations:
+      required: true
+
+  - type: input
+    id: plan_id
+    attributes:
+      label: 계획 ID
+      description: docs/plan.md에 있는 작업이면 대괄호 ID를 적습니다. 새 작업이면 비워둡니다.
+      placeholder: "예: 04, 23a"
+
+  - type: textarea
+    id: purpose
+    attributes:
+      label: 목적
+      description: 무엇을 왜 해야 하는지 짧게 설명합니다.
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: 작업 범위
+      description: 이번 이슈에서 변경할 내용을 체크리스트로 적습니다.
+      placeholder: |
+        - [ ] 첫 번째 작업
+        - [ ] 두 번째 작업
+    validations:
+      required: true
+
+  - type: textarea
+    id: done
+    attributes:
+      label: 완료 조건
+      description: 리뷰어가 완료 여부를 판단할 수 있는 결과를 적습니다.
+    validations:
+      required: true
+
+  - type: input
+    id: dependencies
+    attributes:
+      label: 선행 작업
+      description: 먼저 끝나야 하는 실제 GitHub 이슈 번호가 있으면 적습니다.
+      placeholder: "예: #12"
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: 참고
+      description: 설계 메모, 링크, 제외 범위가 있으면 적습니다.

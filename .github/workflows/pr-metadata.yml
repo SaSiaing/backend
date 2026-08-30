@@ -1,0 +1,44 @@
+name: PR metadata
+
+on:
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: PR 제목과 이슈 연결 확인
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+          REPOSITORY: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          title_pattern='^(feat|fix|docs|refactor|chore)(\([a-z0-9-]+\))?: .{2,}$'
+          if ! printf '%s' "$PR_TITLE" | grep -Eq "$title_pattern"; then
+            echo "PR 제목 형식: <type>(<scope>): <설명>"
+            exit 1
+          fi
+
+          no_issue_pattern='^[[:space:]]*-[[:space:]]*이슈 없음:[[:space:]]*[^[:space:]<]'
+          if printf '%s\n' "$PR_BODY" | grep -Eq "$no_issue_pattern"; then
+            exit 0
+          fi
+
+          if [ "$REPOSITORY" = "SaSiaing/app" ]; then
+            issue_pattern='^[[:space:]]*-[[:space:]]*(Related to|Refs?)[[:space:]]+SaSiaing/backend#[0-9]+'
+          else
+            issue_pattern='^[[:space:]]*-[[:space:]]*(Closes|Fixes|Resolves|Related to|Refs?)[[:space:]]+(SaSiaing/backend)?#[0-9]+'
+          fi
+
+          if ! printf '%s\n' "$PR_BODY" | grep -Eiq "$issue_pattern"; then
+            echo "PR 본문에 실제 GitHub 이슈를 연결하거나 '이슈 없음: 사유'를 적으세요."
+            exit 1
+          fi

@@ -39,6 +39,7 @@ go run ./cmd/api
 - `.codex/config.toml` — workspace-write 샌드박스, 요청 기반 승인, 세션 시작 브랜치 확인.
 - `.codex/rules/` — GitHub·Docker의 읽기 전용 명령 허용 목록.
 - `.githooks/` — `main` 직접 커밋·push와 잘못된 커밋 메시지를 실제로 차단합니다.
+- `.github/` — 이슈·PR 템플릿과 PR 제목·이슈 연결 검사.
 
 처음 열 때 프로젝트를 **trusted**로 승인하고 `/hooks`에서 프로젝트 훅을 검토·승인하세요.
 `make dev`를 한 번 실행하면 Git 훅까지 활성화됩니다.

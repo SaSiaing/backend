@@ -31,6 +31,10 @@ fix/24-past-date-reset
 refactor/07-repo-interface
 ```
 
+- 브랜치 번호는 `[04]` 같은 계획 ID가 아니라 **GitHub가 부여한 실제 이슈 번호**를 씁니다.
+- 이슈는 backend 리포에 모읍니다. app PR에서는 `SaSiaing/backend#번호`로 연결합니다.
+- 원칙은 이슈 하나에 브랜치·PR 하나입니다. 여러 작업을 묶으면 상위 이슈에 체크리스트로 관리합니다.
+
 ## 커밋
 
 ```
@@ -61,6 +65,14 @@ chore: golangci-lint 1.62 업데이트
 
 이 규약은 `.githooks/commit-msg`가 강제합니다. 클론 직후 `make hooks` (backend는 `make dev`)를
 한 번 돌려야 활성화됩니다 — git hook은 클론마다 수동 설정이 필요합니다.
+
+## 이슈·PR
+
+- 새 작업과 버그는 backend의 이슈 폼으로 등록합니다. app에는 별도 이슈를 만들지 않습니다.
+- PR 제목은 커밋과 같은 `<type>(<scope>): <설명>` 형식을 씁니다.
+- PR 본문에 실제 이슈를 연결합니다. 계획 ID만 적지 않습니다.
+- 템플릿의 항목을 지우지 말고 해당 없으면 이유를 적습니다.
+- `.github/workflows/pr-metadata.yml`이 PR 제목과 이슈 연결을 검사합니다.
 
 ## 공통 규칙
 

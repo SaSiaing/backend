@@ -28,6 +28,6 @@ migrate:
 seed:
 	go run ./cmd/seed
 
-## sync-conventions: AGENTS.md와 Git/Codex 하네스를 app 리포로 복사
+## sync-conventions: AGENTS.md와 Git/Codex/PR 하네스를 app 리포로 복사
 sync-conventions:
 	@./scripts/sync-conventions.sh
