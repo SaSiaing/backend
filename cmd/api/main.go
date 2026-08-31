@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/SaSiaing/backend/internal/database"
-	"github.com/SaSiaing/backend/internal/handler"
+	"github.com/SaSiaing/backend/internal/health"
 	"github.com/labstack/echo/v5"
 )
 
@@ -41,7 +41,7 @@ func run() error {
 	defer pool.Close()
 
 	e := echo.New()
-	e.GET("/health", handler.Health(pool))
+	e.GET("/health", health.Handler(pool))
 
 	port := os.Getenv("PORT")
 	if port == "" {

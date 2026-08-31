@@ -1,4 +1,4 @@
-package handler
+package health
 
 import (
 	"context"
@@ -23,7 +23,7 @@ type errorResponse struct {
 	Code    string `json:"code"`
 }
 
-func Health(database databasePinger) echo.HandlerFunc {
+func Handler(database databasePinger) echo.HandlerFunc {
 	return func(c *echo.Context) error {
 		ctx, cancel := context.WithTimeout(c.Request().Context(), healthCheckTimeout)
 		defer cancel()

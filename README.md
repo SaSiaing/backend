@@ -21,6 +21,7 @@ git hook만 필요하면 `make hooks`를 따로 실행해도 됩니다.
 
 - [docs/api.md](docs/api.md) — **API 계약. 코드보다 먼저 고칩니다.**
 - [docs/plan.md](docs/plan.md) — v1 작업 순서
+- [docs/architecture.md](docs/architecture.md) — 기능별 백엔드 폴더 구조와 역할
 
 ## 작업 규약
 

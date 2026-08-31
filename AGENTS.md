@@ -102,14 +102,16 @@ chore: golangci-lint 1.62 업데이트
 ## backend 전용
 
 ```text
-cmd/api/          엔트리포인트
-internal/handler/ Echo 핸들러
-internal/service/ 도메인 로직
-internal/repo/    DB 접근 (sqlc 생성 코드 래핑)
-db/migrations/    goose
-query/            sqlc 입력
-docs/             api.md, plan.md
+cmd/api/              엔트리포인트와 의존성 조립
+internal/<feature>/   기능별 handler, service, repository, model
+internal/database/    PostgreSQL 연결 같은 공통 인프라
+internal/db/          sqlc 생성 코드
+db/migrations/        goose
+query/                sqlc 입력
+docs/                 API, 계획, 구조 문서
 ```
+
+상세 구조와 역할은 `docs/architecture.md`를 따릅니다.
 
 - **이 리포는 public입니다.** `.env`, 서비스 계정 키, OAuth 클라이언트 시크릿을 절대 커밋하지 마세요.
   `.gitignore`가 `.env*`를 막고 있지만 `git add -f`로 뚫립니다.

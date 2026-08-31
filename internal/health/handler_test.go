@@ -1,4 +1,4 @@
-package handler
+package health
 
 import (
 	"context"
@@ -22,7 +22,7 @@ func TestHealth(t *testing.T) {
 	t.Parallel()
 
 	e := echo.New()
-	e.GET("/health", Health(stubDatabase{}))
+	e.GET("/health", Handler(stubDatabase{}))
 
 	recorder := httptest.NewRecorder()
 	e.ServeHTTP(recorder, httptest.NewRequest(http.MethodGet, "/health", nil))
@@ -39,7 +39,7 @@ func TestHealthWhenDatabaseIsUnavailable(t *testing.T) {
 	t.Parallel()
 
 	e := echo.New()
-	e.GET("/health", Health(stubDatabase{err: errors.New("connection refused")}))
+	e.GET("/health", Handler(stubDatabase{err: errors.New("connection refused")}))
 
 	recorder := httptest.NewRecorder()
 	e.ServeHTTP(recorder, httptest.NewRequest(http.MethodGet, "/health", nil))
