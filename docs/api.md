@@ -37,9 +37,16 @@
 
 ### 내역
 - `POST /households/:id/transactions`
+  - 요청: `{ "payer_id": "user-1", "category_id": "food", "type": "expense", "amount": 1200, "occurred_at": "2026-09-01T03:00:00Z", "memo": "점심" }`
+  - 응답: 생성된 내역과 `version: 1`
 - `GET /households/:id/transactions` — 필터: `from` `to` `payer_id` `category_id` `type`
-- `PATCH /households/:id/transactions/:tid` — 낙관적 락, `version` 불일치 시 409
+- `GET /households/:id/transactions/:tid`
+- `PATCH /households/:id/transactions/:tid`
+  - 요청: 바꿀 필드와 현재 `version` (`{ "amount": 1500, "version": 1 }`)
+  - 응답: 수정된 내역과 증가한 `version`; 버전 불일치 시 409
 - `DELETE /households/:id/transactions/:tid`
+
+> 현재 첫 CRUD 단계에서는 내역을 메모리에 저장합니다. 서버를 재시작하면 초기화되며 인증·멤버십 검증, 커서 페이지네이션, DB migration/sqlc는 후속 작업입니다.
 
 ### 집계
 - `GET /households/:id/summary/by-category?from=&to=`

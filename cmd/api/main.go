@@ -11,6 +11,7 @@ import (
 
 	"github.com/SaSiaing/backend/internal/database"
 	"github.com/SaSiaing/backend/internal/health"
+	"github.com/SaSiaing/backend/internal/transaction"
 	"github.com/labstack/echo/v5"
 )
 
@@ -42,6 +43,9 @@ func run() error {
 
 	e := echo.New()
 	e.GET("/health", health.Handler(pool))
+	transactionRepository := transaction.NewMemoryRepository()
+	transactionHandler := transaction.NewHandler(transaction.NewService(transactionRepository))
+	transactionHandler.Register(e)
 
 	port := os.Getenv("PORT")
 	if port == "" {
