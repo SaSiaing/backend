@@ -1,0 +1,56 @@
+name: 버그
+description: 재현 가능한 오동작이나 실사용 문제를 기록합니다.
+labels:
+  - bug
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: 영역
+      options:
+        - backend
+        - app
+        - infra
+        - 확인 필요
+    validations:
+      required: true
+
+  - type: textarea
+    id: current
+    attributes:
+      label: 현재 동작
+      description: 실제로 무엇이 일어나는지 적습니다.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 기대 동작
+      description: 원래 어떻게 동작해야 하는지 적습니다.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 재현 방법
+      description: 다른 팀원이 같은 문제를 확인할 수 있도록 순서대로 적습니다.
+      placeholder: |
+        1. 앱을 실행한다
+        2. ...
+        3. 오류를 확인한다
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 환경
+      description: 기기, OS, 앱 버전, 브랜치 등 관련 정보를 적습니다.
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 로그·화면
+      description: 시크릿을 제거한 로그, 스크린샷, 영상이 있으면 첨부합니다.
